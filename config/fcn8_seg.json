@@ -64,6 +64,9 @@
       "learning_rate_step": null,
       "max_steps": 12000
   },
+    "dirs": {
+      "data_dir": "../data"
+  },
   "use_fc_wd": true,
   "loss": "xentropy",
   "clip_norm" : 1.0,

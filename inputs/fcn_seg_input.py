@@ -20,6 +20,7 @@ import numpy as np
 
 import scipy as scp
 import scipy.misc
+import matplotlib.pyplot as plt
 
 import tensorflow as tf
 from tensorflow.python.ops import math_ops
@@ -356,7 +357,7 @@ def start_enqueuing_threads(hypes, q, phase, sess):
 
     enqueue_op = q.enqueue((image_pl, label_pl))
     gen = _make_data_gen(hypes, phase, data_dir)
-    gen.next()
+    gen.__next__()
     # sess.run(enqueue_op, feed_dict=make_feed(data))
     if phase == 'val':
         num_threads = 1
@@ -389,7 +390,7 @@ def main():
         init = tf.initialize_all_variables()
         sess.run(init)
         coord = tf.train.Coordinator()
-        start_enqueuing_threads(hypes, q, sess, data_dir)
+        start_enqueuing_threads(hypes, q['train'], 'train', sess)
 
         logging.info("Start running")
         threads = tf.train.start_queue_runners(sess=sess, coord=coord)
@@ -397,11 +398,15 @@ def main():
         for i in itertools.count():
             image = image_batch.eval()
             gt = label_batch.eval()
-            scp.misc.imshow(image[0])
+            plt.imshow(np.uint8(image[0]))
+            plt.show()
             gt_bg = gt[0, :, :, 0]
             gt_road = gt[0, :, :, 1]
-            scp.misc.imshow(gt_bg)
-            scp.misc.imshow(gt_road)
+            plt.imshow(np.uint8(gt_bg))
+            plt.show()
+            plt.imshow(np.uint8(gt_road))
+            plt.show()
+            print(1)
 
         coord.request_stop()
         coord.join(threads)
