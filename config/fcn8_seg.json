@@ -1,12 +1,11 @@
 {
   "model": {
-    "input_file": "../inputs/fcn_seg_input.py",
-    "architecture_file" : "../encoder/fcn8_vgg.py",
-    "objective_file" : "../decoder/multiloss.py",
-    "optimizer_file" : "../optimizer/generic_optimizer.py",
-    "evaluator_file" : "../evals/eval.py"
+    "input_file": "inputs/fcn_seg_input.py",
+    "architecture_file" : "encoder/fcn8_vgg.py",
+    "objective_file" : "decoder/multiloss.py",
+    "optimizer_file" : "optimizer/generic_optimizer.py",
+    "evaluator_file" : "evals/eval.py"
   },
-  "path": ["../incl"],
 
   "data": {
     "train_file" : "data_road/train3.txt",
@@ -65,7 +64,9 @@
       "max_steps": 12000
   },
     "dirs": {
-      "data_dir": "../data"
+      "data_dir": "../data",
+      "output_dir": "../output",
+      "base_path":"D:/workspace/my_fcn/"
   },
   "use_fc_wd": true,
   "loss": "xentropy",
