@@ -141,7 +141,7 @@ class FCN8VGG:
                                            num_classes=num_classes,
                                            relu=False)
 
-# 预测1
+        # 预测1
         self.pred = tf.argmax(self.score_fr, dimension=3)
 
         self.upscore2 = self._upscore_layer(self.score_fr,
@@ -168,7 +168,7 @@ class FCN8VGG:
                                              debug=debug, name='upscore32',
                                              ksize=16, stride=8)
 
-# 预测2
+        # 预测2
         self.pred_up = tf.argmax(self.upscore32, dimension=3)
 
     def _max_pool(self, bottom, name, debug):
