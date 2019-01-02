@@ -82,7 +82,7 @@ def main(_):
 
     try:
         import tensorvision.train
-        import tensorflow_fcn.utils
+        import model.utils
     except ImportError:
         logging.error("Could not import the submodules.")
         logging.error("Please execute:"
