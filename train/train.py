@@ -89,12 +89,7 @@ def main(_):
                       "'git submodule update --init --recursive'")
         exit(1)
 
-    if tf.app.flags.FLAGS.hypes is None:
-        logging.error("No hype file is given.")
-        logging.info("Usage: python train.py --hypes hypes/KittiClass.json")
-        exit(1)
-
-    with open(tf.app.flags.FLAGS.hypes, 'r') as f:
+    with open('../config/fcn8_seg.json', 'r') as f:
         logging.info("f: %s", f)
         hypes = commentjson.load(f)
     utils.load_plugins()
