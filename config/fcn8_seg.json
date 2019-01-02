@@ -1,6 +1,6 @@
 {
   "model": {
-    "input_file": "../inputs/kitti_seg_input.py",
+    "input_file": "../inputs/fcn_seg_input.py",
     "architecture_file" : "../encoder/fcn8_vgg.py",
     "objective_file" : "../decoder/multiloss.py",
     "optimizer_file" : "../optimizer/generic_optimizer.py",
