@@ -58,13 +58,16 @@ def main():
         train_op = generic_optimizer.training(hypes, losses,
                                               global_step, learning_rate)
 
-    # with tf.name_scope("Evaluation"):
-    #     # Add the Op to compare the logits to the labels during evaluation.
-    #     eval_list = eval.(
-    #         hypes, image, labels, decoded_logits, losses, global_step)
+        # with tf.name_scope("Evaluation"):
+        #     # Add the Op to compare the logits to the labels during evaluation.
+        #     eval_list = eval.(
+        #         hypes, image, labels, decoded_logits, losses, global_step)
 
         summary_op = tf.summary.merge_all()
 
+    coord = tf.train.Coordinator()
+    threads = tf.train.start_queue_runners(sess=sess, coord=coord)
+    tf.InteractiveSession()
     sess = tf.get_default_session()
     init = tf.global_variables_initializer()
     sess.run(init)
@@ -74,6 +77,7 @@ def main():
         lr = 0.0001
         feed_dict = {learning_rate: lr}
         sess.run(train_op, feed_dict=feed_dict)
-
+    coord.request_stop()
+    coord.join(threads)
     if __name__ == '__main__':
         main()
