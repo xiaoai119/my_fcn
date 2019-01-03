@@ -31,7 +31,7 @@ def main():
     # logging.info("Initialize training folder")
     # train.initialize_training_folder(hypes)
     # logging.info("Start training")
-    train.do_training(hypes)
+    # train.do_training(hypes)
     learning_rate = tf.placeholder(tf.float32)
 
     with tf.name_scope("Queues"):
@@ -65,12 +65,12 @@ def main():
 
         summary_op = tf.summary.merge_all()
 
-    coord = tf.train.Coordinator()
-    threads = tf.train.start_queue_runners(sess=sess, coord=coord)
     tf.InteractiveSession()
     sess = tf.get_default_session()
     init = tf.global_variables_initializer()
     sess.run(init)
+    coord = tf.train.Coordinator()
+    threads = tf.train.start_queue_runners(sess=sess, coord=coord)
     fcn_seg_input.start_enqueuing_threads(hypes, queue, 'train', sess)
 
     for step in range(0, 1):
@@ -79,5 +79,7 @@ def main():
         sess.run(train_op, feed_dict=feed_dict)
     coord.request_stop()
     coord.join(threads)
-    if __name__ == '__main__':
-        main()
+
+
+if __name__ == '__main__':
+    main()
