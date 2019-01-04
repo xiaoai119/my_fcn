@@ -38,9 +38,9 @@
     "patch_width": 256,
     "crop_chance": 0.8,
     "fix_shape": false,
-    "reseize_image": false,
-    "image_height" : 384,
-    "image_width" : 1248,
+    "reseize_image": true,
+    "image_height" : 256,
+    "image_width" : 256,
 
     "augment_level": 0
   },
@@ -61,7 +61,7 @@
       "threads": 1,
       "learning_rate": 1e-4,
       "learning_rate_step": null,
-      "max_steps": 2
+      "max_steps": 1
   },
     "dirs": {
       "data_dir": "../data",
