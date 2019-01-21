@@ -24,6 +24,7 @@ import matplotlib.pyplot as plt
 
 import tensorflow as tf
 from tensorflow.python.ops import math_ops
+import imageio
 from tensorflow.python.training import queue_runner
 from tensorflow.python.ops import data_flow_ops
 from tensorflow.python.framework import dtypes
@@ -132,9 +133,9 @@ def _load_gt_file(hypes, data_file=None):
             assert os.path.exists(gt_image_file), \
                 "File does not exist: %s" % gt_image_file
             # 1242*375
-            image = scipy.misc.imread(image_file, mode='RGB')
+            image = imageio.imread(image_file)
             # Please update Scipy, if mode='RGB' is not avaible
-            gt_image = scp.misc.imread(gt_image_file, mode='RGB')
+            gt_image = imageio.imread(gt_image_file)
 
             yield image, gt_image
 
@@ -396,14 +397,19 @@ def main():
         threads = tf.train.start_queue_runners(sess=sess, coord=coord)
 
         for i in itertools.count():
+            plt.figure(figsize=(10, 5))
             image = image_batch.eval()
             gt = label_batch.eval()
+            ax = plt.subplot(131)
             plt.imshow(np.uint8(image[0]))
-            plt.show()
+            # plt.show()
             gt_bg = gt[0, :, :, 0]
             gt_road = gt[0, :, :, 1]
+            ax = plt.subplot(132)
             plt.imshow(np.uint8(gt_bg))
-            plt.show()
+            # plt.show()
+            ax = plt.subplot(133)
+
             plt.imshow(np.uint8(gt_road))
             plt.show()
             print(1)

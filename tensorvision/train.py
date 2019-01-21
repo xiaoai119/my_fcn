@@ -160,8 +160,7 @@ def _write_images_to_disk(hypes, images, step):
 
 
 def _print_eval_dict(eval_names, eval_results, prefix=''):
-    print_str = string.join([nam + ": %.2f" for nam in eval_names],
-                            ', ')
+    print_str = ''.join([nam + ": %.2f"+", " for nam in eval_names])
     print_str = "   " + prefix + "  " + print_str
     logging.info(print_str % tuple(eval_results))
 
